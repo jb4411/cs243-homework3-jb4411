@@ -18,10 +18,7 @@
 /// <li>  documentation: documentation is non-existent except for this block.
 /// </li>
 /// </ol>
-///
 /// @author Jesse Burdick-Pless jb4411
-/// fix 1: stopped a crash by changing %s to %c in two printf statements in
-/// the main function.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +41,7 @@ void survivalRule(char life[][20], int x, int y)
                if(life[row - 1][col - 1] == '*')
                   ++neighbors;
                if(life[row - 1][col] == '*')
-                  ++neighbors;er
+                  ++neighbors;
                if(life[row - 1][col + 1] == '*')
                   ++neighbors;
                if(life[row][col - 1] == '*')
@@ -106,9 +103,9 @@ void birthRule(char life[][20], int x, int y)
 
 int main(void)
 {
-      char life[20][20];
+      char life[20][20] = {' '}; /// fix 2: initlized array
       int orgs, gens;
-      int i, a, b, row, col;
+      int i, a, b, row, col = 0; /// fix 2: initlized varibles
       int count = 0;
       int x = 19;
       int y = 19;
@@ -143,9 +140,9 @@ int main(void)
       {
           for(col = 0; col<20; col++)
           {
-              printf("%c", life[row][col]);
+              printf("%c", life[row][col]); /// fix 1: changed %s to %c
           }
-          puts(" ");
+	  puts(" ");
       }
 
       while ( 1 ) {
@@ -155,7 +152,7 @@ int main(void)
           {
               for(col = 0; col<20; col++)
               {
-                  printf("%c", life[row][col]);
+                  printf("%c", life[row][col]); /// fix 1: changed %s to %c
               }
               puts(" ");
           }
