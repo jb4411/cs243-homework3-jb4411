@@ -18,6 +18,9 @@
 /// <li>  documentation: documentation is non-existent except for this block.
 /// </li>
 /// </ol>
+/// file: good_life.c
+/// description: a program that plays Conway's Game of Life
+///
 /// @author Jesse Burdick-Pless jb4411 
 
 #include <stdio.h>
@@ -25,9 +28,16 @@
 
 #define GRID_SIZE 20
 
-void header(void) {
+/// Prints a header meassage when the program is started
+
+void header() {
 	printf("\n\t..Welcome to the Game of life..\n");
 }
+
+/// Copies all elements from the arc array into the dest array.
+///
+/// @param src   the array of char to be copied into dest
+/// @param dest  the array src is copied into
 
 void copy_array(char src[][GRID_SIZE], char dest[][GRID_SIZE]) {
 	int row, col;
@@ -37,6 +47,14 @@ void copy_array(char src[][GRID_SIZE], char dest[][GRID_SIZE]) {
 		}
 	}
 }
+
+/// Counts and returns the number of neighbors the selected cell has. a cell
+/// is selected by passed in its row and column.
+///
+/// @param life      the array of char that holds the board of cells
+/// @param life_row  the row of the selected cell
+/// @param life_col  the column of the selected cell
+/// @return the number of neighbors the selected cell has 
 
 int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
 	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
@@ -64,6 +82,9 @@ int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
 	return neighbors;
 } 
 
+/// Generates the next generation from the board of cells passed in.
+/// 
+/// @param life  the array of char that holds the board of cells
 void game_of_life(char life[][GRID_SIZE]) {
 	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
 	copy_array(life, newlife);
@@ -83,6 +104,11 @@ void game_of_life(char life[][GRID_SIZE]) {
 	copy_array(newlife, life);
 	return;
 }
+
+/// The main program asks the user to enter a starting number of organisms.
+/// The first generation board is the randomly generated. From here the main
+/// program simulates 100 generations from the starting board and prints each
+/// one out to the user.
 
 int main(void) {
 	char life[GRID_SIZE][GRID_SIZE] = {{' '}}; /// fix 2: initlized array
@@ -126,9 +152,6 @@ int main(void) {
 	printf("\ngeneration: 0\n");
 
 	while ( count < 100 ) {
-		///birthRule(life); fix 14: removed excess arguments 'x' & 'y'
-		///survival_rule(life); 
-		/// fix 15: removed excess arguments 'x' & 'y'
 		game_of_life(life);
 		for(row = 0; row<20; row++) {
 			for(col = 0; col<20; col++) {
