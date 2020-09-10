@@ -138,17 +138,17 @@ int main(void) {
 
 	while( i<orgs ) {
 		row = rand();
-		row %= 20;
+		row %= GRID_SIZE;
 		col = rand();
-		col %= 20;
+		col %= GRID_SIZE;
 		if( life[row][col] != '*' ) {
 			life[row][col] = '*'; /// fix 4: removed an '='
 			i++;
 		} 
 	}
 
-	for(row = 0; row<20; row++) {
-		for(col = 0; col<20; col++) {
+	for(row = 0; row < GRID_SIZE; row++) {
+		for(col = 0; col < GRID_SIZE; col++) {
 			if(life[row][col] != '*')
 				life[row][col] = ' '; /// fix 3: removed an '='
 			printf("%c", life[row][col]); 
@@ -162,8 +162,8 @@ int main(void) {
 
 	while ( count < 99 ) {
 		game_of_life(life);
-		for(row = 0; row<20; row++) {
-			for(col = 0; col<20; col++) {
+		for(row = 0; row < GRID_SIZE; row++) {
+			for(col = 0; col < GRID_SIZE; col++) {
 				printf("%c", life[row][col]); 
 				/// fix 1: changed %s to %c
 			}
