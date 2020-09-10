@@ -19,7 +19,7 @@
 /// </li>
 /// </ol>
 /// file: good_life.c
-/// description: a program that plays Conway's Game of Life
+/// description: A program that plays Conway's Game of Life
 ///
 /// @author Jesse Burdick-Pless jb4411 
 
@@ -28,13 +28,13 @@
 
 #define GRID_SIZE 20
 
-/// Prints a header meassage when the program is started
+/// Prints a header meassage when the program is started.
 
 void header() {
 	printf("\n\t..Welcome to the Game of life..\n");
 }
 
-/// Copies all elements from the arc array into the dest array.
+/// Copies all elements from the src array into the dest array.
 ///
 /// @param src   the array of char to be copied into dest
 /// @param dest  the array src is copied into
@@ -48,12 +48,13 @@ void copy_array(char src[][GRID_SIZE], char dest[][GRID_SIZE]) {
 	}
 }
 
-/// Counts and returns the number of neighbors the selected cell has. a cell
-/// is selected by passed in its row and column.
+/// Counts and returns the number of neighbors the selected cell has. 
+/// A cell is selected by passing in its row and column.
 ///
 /// @param life      the array of char that holds the board of cells
 /// @param life_row  the row of the selected cell
 /// @param life_col  the column of the selected cell
+///
 /// @return the number of neighbors the selected cell has 
 
 int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
@@ -85,6 +86,7 @@ int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
 /// Generates the next generation from the board of cells passed in.
 /// 
 /// @param life  the array of char that holds the board of cells
+
 void game_of_life(char life[][GRID_SIZE]) {
 	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
 	copy_array(life, newlife);
@@ -106,9 +108,10 @@ void game_of_life(char life[][GRID_SIZE]) {
 }
 
 /// The main program asks the user to enter a starting number of organisms.
-/// The first generation board is the randomly generated. From here the main
-/// program simulates 100 generations from the starting board and prints each
-/// one out to the user.
+/// The first generation board is then randomly generated with that number of
+/// organisms. From there the main program simulates 100 generations from the 
+/// starting board and prints each one out to the user followed by the current
+/// generation number.
 
 int main(void) {
 	char life[GRID_SIZE][GRID_SIZE] = {{' '}}; /// fix 2: initlized array
@@ -124,7 +127,7 @@ int main(void) {
 
 	printf("\nPlease enter the initial number of organisms: ");
 	scanf("%i", &orgs);
-	puts(" ");
+
 	srand( 31 );
 
 	while( i<orgs ) {
