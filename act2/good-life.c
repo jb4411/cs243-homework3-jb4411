@@ -38,6 +38,32 @@ void copy_array(char src[][GRID_SIZE], char dest[][GRID_SIZE]) {
 	}
 }
 
+int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
+	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
+	copy_array(life, newlife);
+	int neighbors = 0;
+	int row = life_row % GRID_SIZE;
+	int col = life_col % GRID_SIZE;
+	if(life[row - 1][col - 1] == '*')
+		neighbors++;
+	if(life[row - 1][col] == '*')
+		neighbors++;
+	if(life[row - 1][col + 1] == '*')
+		neighbors++;
+	if(life[row][col - 1] == '*')
+		neighbors++;
+	if(life[row][col + 1] == '*')
+		neighbors++;
+	if(life[row + 1][col - 1] == '*')
+		neighbors++;
+	if(life[row + 1][col] == '*')
+		neighbors++;
+	if(life[row + 1][col + 1] == '*')
+		neighbors++;
+
+	return neighbors;
+} 
+
 /// fix 13: removed unused parameters 'x' and 'y'
 void survival_rule(char life[][GRID_SIZE]) {
 	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
@@ -56,14 +82,14 @@ void survival_rule(char life[][GRID_SIZE]) {
 			}
 			if(col > 0 && life[row][col - 1] == '*')
 				++neighbors;
-			if(col < GRID_SIZE - 1 && life[row][col + 1] == '*')
+			if(col < GRID_SIZE && life[row][col + 1] == '*')
 				++neighbors;
 			if(row < GRID_SIZE) {
 				if(col > 0 && life[row + 1][col - 1] == '*')
 					++neighbors;
 				if(life[row + 1][col] == '*')
 					++neighbors;   
-				if(col < GRID_SIZE - 1 && life[row + 1][col + 1] == '*')
+				if(col < 19 && life[row + 1][col + 1] == '*')
 					++neighbors;
 			}
 			if(neighbors == 3) {
@@ -82,11 +108,11 @@ void survival_rule(char life[][GRID_SIZE]) {
 }
 
 /// ^ fix 12: removed unused parameters 'x' and 'y'
-void birth_rule(char life[][GRID_SIZE]) {
+void birth_rule(char life[][20]) {
 	int row, col;
 	int neighbors = 0;
-	for(row = 1; row < GRID_SIZE - 1; row++) {
-		for(col = 1; col < GRID_SIZE - 1; col++) {
+	for(row = 1; row<19; row++) {
+		for(col = 1; col<19; col++) {
 			if(life[row][col] == ' ') { 
 				/// fix 8: removed '&' and changed " to '
 				if(life[row - 1][col - 1] == '*')
@@ -115,6 +141,25 @@ void birth_rule(char life[][GRID_SIZE]) {
 	return;
 }
 
+void game_of_life(char life[][GRID_SIZE]) {
+	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
+	copy_array(life, newlife);
+	int neighbors, row, col;
+	for(row = 0; row < GRID_SIZE; row++) {
+		for(col = 0; col < GRID_SIZE; col++) {
+			neighbors = count_neighbors(life, row, col);
+			if(neighbors == 3) {
+				newlife[row][col] = '*';
+			} else if(neighbors == 2 && life[row][col] == '*') {
+				newlife[row][col] = '*';
+			} else {
+				newlife[row][col] = ' ';
+			}
+		}
+	}
+	copy_array(newlife, life);
+	return;
+}
 
 int main(void) {
 	char life[GRID_SIZE][GRID_SIZE] = {{' '}}; /// fix 2: initlized array
@@ -135,17 +180,17 @@ int main(void) {
 
 	while( i<orgs ) {
 		row = rand();
-		row %= GRID_SIZE;
+		row %= 20;
 		col = rand();
-		col %= GRID_SIZE;
+		col %= 20;
 		if( life[row][col] != '*' ) {
 			life[row][col] = '*'; /// fix 4: removed an '='
 			i++;
 		} 
 	}
 
-	for(row = 0; row < GRID_SIZE; row++) {
-		for(col = 0; col < GRID_SIZE; col++) {
+	for(row = 0; row<20; row++) {
+		for(col = 0; col<20; col++) {
 			if(life[row][col] != '*')
 				life[row][col] = ' '; /// fix 3: removed an '='
 			printf("%c", life[row][col]); 
@@ -158,11 +203,12 @@ int main(void) {
 	printf("\ngeneration: 0\n");
 
 	while ( count < 100 ) {
-		//birthRule(life); ///fix 14: removed excess arguments 'x' & 'y'
-		survival_rule(life); 
+		///birthRule(life); fix 14: removed excess arguments 'x' & 'y'
+		///survival_rule(life); 
 		/// fix 15: removed excess arguments 'x' & 'y'
-		for(row = 0; row < GRID_SIZE; row++) {
-			for(col = 0; col < GRID_SIZE; col++) {
+		game_of_life(life);
+		for(row = 0; row<20; row++) {
+			for(col = 0; col<20; col++) {
 				printf("%c", life[row][col]); 
 				/// fix 1: changed %s to %c
 			}
