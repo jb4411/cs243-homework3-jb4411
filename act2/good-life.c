@@ -48,40 +48,46 @@ void copy_array(char src[][GRID_SIZE], char dest[][GRID_SIZE]) {
 	}
 }
 
-/// Counts and returns the number of neighbors the selected cell has. 
+/// A modulo function that works for positive and negative numbers that is used
+/// by count_neighbors.
+///
+/// @param x  the number that is having its modulus calculated.
+/// @return   the positive modulo of x
+
+int modulo(int x){
+    return (x % GRID_SIZE + GRID_SIZE) %GRID_SIZE;
+}
+
+/// Counts and returns the number of neighbors the selected cell has.
 /// A cell is selected by passing in its row and column.
 ///
 /// @param life      the array of char that holds the board of cells
-/// @param life_row  the row of the selected cell
-/// @param life_col  the column of the selected cell
+/// @param row  the row of the selected cell
+/// @param col  the column of the selected cell
 ///
-/// @return the number of neighbors the selected cell has 
+/// @return the number of neighbors the selected cell has
 
-int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
-	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
-	copy_array(life, newlife);
-	int neighbors = 0;
-	int row = life_row % GRID_SIZE;
-	int col = life_col % GRID_SIZE;
-	if(life[row - 1][col - 1] == '*')
-		neighbors++;
-	if(life[row - 1][col] == '*')
-		neighbors++;
-	if(life[row - 1][col + 1] == '*')
-		neighbors++;
-	if(life[row][col - 1] == '*')
-		neighbors++;
-	if(life[row][col + 1] == '*')
-		neighbors++;
-	if(life[row + 1][col - 1] == '*')
-		neighbors++;
-	if(life[row + 1][col] == '*')
-		neighbors++;
-	if(life[row + 1][col + 1] == '*')
-		neighbors++;
+int count_neighbors(char life[][GRID_SIZE], int row, int col) {
+        int neighbors = 0;
+        if(life[modulo(row - 1)][modulo(col - 1)] == '*')
+                neighbors++;
+        if(life[modulo(row - 1)][col] == '*')
+                neighbors++;
+        if(life[modulo(row - 1)][(col + 1) % GRID_SIZE] == '*')
+                neighbors++;
+        if(life[row][modulo(col - 1)] == '*')
+                neighbors++;
+        if(life[row][(col + 1) % GRID_SIZE] == '*')
+                neighbors++;
+        if(life[(row + 1) % GRID_SIZE][modulo(col - 1)] == '*')
+                neighbors++;
+        if(life[(row + 1) % GRID_SIZE][col] == '*')
+                neighbors++;
+        if(life[(row + 1) % GRID_SIZE][(col + 1) % GRID_SIZE] == '*')
+                neighbors++;
 
-	return neighbors;
-} 
+        return neighbors;
+}
 
 /// Generates the next generation from the board of cells passed in.
 /// 
@@ -89,8 +95,8 @@ int count_neighbors(char life[][GRID_SIZE], int life_row, int life_col) {
 
 void game_of_life(char life[][GRID_SIZE]) {
 	char newlife[GRID_SIZE][GRID_SIZE] = {{' '}};
-	copy_array(life, newlife);
-	int neighbors, row, col;
+	//copy_array(life, newlife);
+	int neighbors = 0, row = 0, col = 0;
 	for(row = 0; row < GRID_SIZE; row++) {
 		for(col = 0; col < GRID_SIZE; col++) {
 			neighbors = count_neighbors(life, row, col);
@@ -127,7 +133,7 @@ int main(void) {
 
 	printf("\nPlease enter the initial number of organisms: ");
 	scanf("%i", &orgs);
-
+	puts(" ");
 	srand( 31 );
 
 	while( i<orgs ) {
@@ -152,9 +158,9 @@ int main(void) {
 		/// added functions to print generation 0 to this loop
 	}
 
-	printf("\ngeneration: 0\n");
+	printf("\ngeneration: 0\n\n");
 
-	while ( count < 100 ) {
+	while ( count < 99 ) {
 		game_of_life(life);
 		for(row = 0; row<20; row++) {
 			for(col = 0; col<20; col++) {
@@ -163,7 +169,7 @@ int main(void) {
 			}
 			puts(" ");
 		}
-		printf("\ngeneration: %d\n", count+1);
+		printf("\ngeneration: %d\n\n", count+1);
 		count++;
 	}
 
