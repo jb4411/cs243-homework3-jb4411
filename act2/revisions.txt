@@ -1,0 +1,60 @@
+commit 1f37d0416e385911daea76322b9bb3cd15a27404
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Thu Sep 10 17:34:57 2020 -0400
+
+    Fixed typos in documentation.
+
+commit 410df127d6810825edf415492aac8f1dda55fff2
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Thu Sep 10 13:41:27 2020 -0400
+
+    Added documentation to all functions in good_life.c
+
+commit 33c072fa18eed0e39c1f5c3a8e4bca132bc05540
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Thu Sep 10 13:17:01 2020 -0400
+
+    Removed unused functions birthRule and survivalRule.
+
+commit 1308d892f82b36a807e542d44751d420862c1649
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Thu Sep 10 13:13:47 2020 -0400
+
+    Added a function to count neighbors. Added a function to copy an array. Added a new function, game_of_life to replace birthRule and survivalRule.
+
+commit 3c5364ca417e7836399a700070e8200f4d59852f
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Thu Sep 10 00:10:03 2020 -0400
+
+    Added a GRID_SIZE constant. Fixed brackets and indentation.
+
+commit 693cdf1df84718b088f45dd57e0153f086222992
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Wed Sep 9 20:39:18 2020 -0400
+
+    Fixed all obvious errors with the game of life algorthim
+
+commit 289f839a9bccb8f593b8f2473ed0bdca02284512
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Wed Sep 9 14:38:36 2020 -0400
+
+    Fixed good_life.c so it compiles without any errors or warnings and made output stop after 100 generations.
+
+commit 7cb27ed5504e6472229c6a1aac04ea8888844d91
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Wed Sep 9 13:46:54 2020 -0400
+
+    Fixed the garbage output in good_life.c
+
+commit fa7b984ecdb551801b14089afe1f42f0ce485e5a
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Sat Sep 5 22:12:55 2020 -0400
+
+    fix 1: stopped a crash by changing %s to %c in two printf statements in
+    /// the main function.
+
+commit 5988fac7f6fdbca2f98ddd044b0ecd91eba2cc65
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Sat Sep 5 21:09:56 2020 -0400
+
+    initial commit. Downloaded hw3 files

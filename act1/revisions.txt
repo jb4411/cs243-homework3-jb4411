@@ -1,0 +1,18 @@
+commit 7cb27ed5504e6472229c6a1aac04ea8888844d91
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Wed Sep 9 13:46:54 2020 -0400
+
+    Fixed the garbage output in good_life.c
+
+commit fa7b984ecdb551801b14089afe1f42f0ce485e5a
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Sat Sep 5 22:12:55 2020 -0400
+
+    fix 1: stopped a crash by changing %s to %c in two printf statements in
+    /// the main function.
+
+commit 5988fac7f6fdbca2f98ddd044b0ecd91eba2cc65
+Author: Jesse  Burdick-Pless <jb4411@cs.rit.edu>
+Date:   Sat Sep 5 21:09:56 2020 -0400
+
+    initial commit. Downloaded hw3 files

@@ -1,0 +1,105 @@
+(gdb) break 143
+Breakpoint 1 at 0xe03: file good-life.c, line 143.
+(gdb) run
+Starting program: /home/stu3/s0/jb4411/Courses/CS243/Homeworks/hw3/act1/good-life
+
+        ..Welcome to the Game of life..
+
+Please enter the initial number of organisms: 123
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+(gdb) display row
+1: row = 0
+(gdb) display col
+2: col = 0
+(gdb) display life[row][col]
+3: life[row][col] = 2 '\002'
+(gdb) continue 19
+Will ignore next 18 crossings of breakpoint 1.  Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 0
+2: col = 19
+3: life[row][col] = -1 '\377'
+(gdb) continue
+Continuing.
+▒▒▒
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 1
+2: col = 0
+3: life[row][col] = -1 '\377'
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 1
+2: col = 1
+3: life[row][col] = 127 '\177'
+(gdb) continue 18
+Will ignore next 17 crossings of breakpoint 1.  Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 1
+2: col = 19
+3: life[row][col] = 0 '\000'
+(gdb) continue
+Continuing.
+▒▒▒▒
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 2
+2: col = 0
+3: life[row][col] = 0 '\000'
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 2
+2: col = 1
+3: life[row][col] = 0 '\000'
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 2
+2: col = 2
+3: life[row][col] = 0 '\000'
+(gdb) continue 16
+Will ignore next 15 crossings of breakpoint 1.  Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 2
+2: col = 18
+3: life[row][col] = 0 '\000'
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 2
+2: col = 19
+3: life[row][col] = 0 '\000'
+(gdb) continue
+Continuing.
+8▒▒▒
+
+Breakpoint 1, main () at good-life.c:143
+143                   printf("%c", life[row][col]);
+1: row = 3
+2: col = 0
+3: life[row][col] = 0 '\000'
+
+The array on line 106 was not properly initlized resulting in garbage output.
+This was fixed by initlizing each element in the array to ' '.
+The varibles on line 108 were also not initlized which caused garbage output.
+This was fixed by initlizing the 5 varibles to 0.

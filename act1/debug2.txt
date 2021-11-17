@@ -1,0 +1,54 @@
+(gdb) run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/stu3/s0/jb4411/Courses/CS243/Homeworks/hw3/act1/good-life
+
+        ..Welcome to the Game of life..
+
+Please enter the initial number of organisms: 123
+
+Breakpoint 2, main () at good-life.c:143
+143                   printf("%s", life[row][col]);
+(gdb) display row
+1: row = 0
+(gdb) display col
+2: col = 0
+(gdb) whatis life
+type = char [20][20]
+(gdb) display life[row][col]
+3: life[row][col] = 2 '\002'
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+__strlen_avx2 () at ../sysdeps/x86_64/multiarch/strlen-avx2.S:62
+62      ../sysdeps/x86_64/multiarch/strlen-avx2.S: No such file or directory.
+(gdb) backtrace
+#0  __strlen_avx2 () at ../sysdeps/x86_64/multiarch/strlen-avx2.S:62
+#1  0x00007ffff7a41563 in _IO_vfprintf_internal (
+    s=0x7ffff7dd0760 <_IO_2_1_stdout_>, format=0x555555554ff3 "%s",
+    ap=ap@entry=0x7fffffffe4f0) at vfprintf.c:1643
+#2  0x00007ffff7a48fa6 in __printf (format=<optimized out>) at printf.c:33
+#3  0x0000555555554df8 in main () at good-life.c:143
+(gdb) frame 3
+#3  0x0000555555554df8 in main () at good-life.c:143
+143                   printf("%s", life[row][col]);
+(gdb) list
+138
+139           for(row = 0; row<20; row++)
+140           {
+141               for(col = 0; col<20; col++)
+142               {
+143                   printf("%s", life[row][col]);
+144               }
+145               puts(" ");
+146           }
+147
+
+When printf is used with the %s tag it is expecting a NUL terminated C
+string. Instead it is given life[row][col], which is a single char.
+Becuse it is not NUL termintaed printf will keep reading until it finds
+a NUL byte. This causes the error "Segmentation fault (core dumped)" 
+when printf tries to read memory it does not have access to. This can
+be easily fixed by changing the %s tag to the %c tag which is used to
+print a single char. This is a problem on lines 143 and 155.
